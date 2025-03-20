@@ -26,7 +26,7 @@ from sklearn.neighbors import NearestNeighbors
 import time
 
 from matplotlib.patches import FancyArrowPatch
-
+from matplotlib.collections import LineCollection
 
 def glm_pca(num_dims, penalty, counts_mat, coords_mat):
     num_dims=8 # 2 * number of clusters
@@ -172,7 +172,7 @@ def plot_spatial_dag(dag_adjacency_matrix, coords_mat, isodepth=None,
 
     points = coords_mat
 
-    plt.figure(figsize=(30, 30))
+    plt.figure(figsize=(15, 15))
     ax = plt.gca()
 
     # Main scatter plot
@@ -180,49 +180,51 @@ def plot_spatial_dag(dag_adjacency_matrix, coords_mat, isodepth=None,
         points[:, 0], points[:, 1], 
         c=isodepth if isodepth is not None else 'blue', 
         cmap=color if isodepth is not None else None, 
-        s=size, edgecolors='black', linewidths=0.8, alpha=0.9
+        s=size, edgecolors='black', linewidths=0.5, alpha=0.8
     )
 
     # Optional colorbar
     if legend and isodepth is not None:
         cbar = plt.colorbar(scatter)
-        cbar.set_label('Isodepth', fontsize=20)
+        cbar.set_label('Isodepth', fontsize=14)
 
-    # Adjust arrow size for visual clarity
+    # Adjust arrow size
     arrow_scale = np.sqrt(size) * arrow_size  
-    shrink_val = get_shrink_param(size)  # "shrink" for arrow
+    shrink_val = arrow_scale * 0.1
 
-    if isodepth_levels is None:
-        for i, j in dag_adjacency_arr:
-            arrow = FancyArrowPatch(
-                (points[i, 0], points[i, 1]), 
-                (points[j, 0], points[j, 1]),
-                arrowstyle=f'->,head_width={arrow_scale},head_length={arrow_scale * 3}',
-                linewidth=4,
-                color='black',
-                alpha=0.9,
-                # The magic:
-                shrinkA=shrink_val,  # Shrink arrow tail
-                shrinkB=shrink_val,  # Shrink arrow head
-            )
-            ax.add_patch(arrow)
-    else:
-        # Code for plotting contours etc.
-        ...
-        # (unchanged from your original, omitted for brevity)
+    # Create a collection of lines instead of patches
+    lines = []
+    for i, j in dag_adjacency_arr:
+        start = points[i]
+        end = points[j]
+        lines.append([start, end])
+    
+    line_collection = LineCollection(
+        lines, color="black", linewidths=1.2*arrow_size, alpha=0.8
+    )
+    ax.add_collection(line_collection)
+
+    # Add arrowheads
+    for i, j in dag_adjacency_arr:
+        start = points[i]
+        end = points[j]
+        direction = (end - start) / np.linalg.norm(end - start)
+        arrow_head = end - shrink_val * direction
+
+        ax.annotate("", xy=arrow_head, xytext=start,
+                    arrowprops=dict(arrowstyle="->", color="black", lw=1.2*arrow_size))
 
     if lims:
-        ax.set_xlim(lims[0])  # x-range
-        ax.set_ylim(lims[1])  # y-range
+        ax.set_xlim(lims[0])
+        ax.set_ylim(lims[1])
 
-    plt.title(title, fontsize=24)
+    plt.title(title, fontsize=18)
     
     plt.axis("off")
     if file:
         plt.savefig(f"{file}.png", dpi=300, bbox_inches='tight')
 
     plt.show()
-
 
     
 def pw_fit_dict(counts_mat, gaston_labels, gaston_isodepth, cell_type_df, ct_list, zero_fit_threshold=75,
