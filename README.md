@@ -13,10 +13,8 @@ pip install gaston-spatial
 ``` 
 and 
 ```bash
-git clone https://github.com/rs239/velorama.git
-cd ./velorama
 export SKLEARN_ALLOW_DEPRECATED_SKLEARN_PACKAGE_INSTALL=True
-pip install .
+pip install git+https://github.com/rs239/velorama.git
 ``` 
 respectively. Then, clone this repository with 
 ```bash
