@@ -27,6 +27,6 @@ cd glacier
 
 After everything is installed, navigate to the tutorial folder. ```cerebellum_data``` is there as sample data. First download ```cerebellum_counts_mat.npy``` from [here](https://drive.google.com/drive/u/0/folders/1TaTSYs2z-Vb7-X8yLpZeokjN_52x6F1k) and put it inside the ```cerebellum_data``` folder. Then follow the tutorial, including the ```CREATE DATASETS``` portion.
 
-With created datasets, go to ```velorama``` folder and run commands such as ```python run_modified.py -ds $dataset -dev $device``` to infer transcriptional and signaling relationships. ```$dataset``` is the data saved from the previous step. ```$device``` can be cpu or gpu. Other hyperparameters that can be change include maximum number of lags ```$L```, dimension of hidden layers ```$hidden```, among others.
+With created datasets, go to ```velorama``` folder and run commands such as ```python run_modified.py -ds $dataset -dyn dag_precomputed -dev $device``` to infer transcriptional and signaling relationships. **```-dyn``` needs to remain ```dag_precomputed```**, since we use the spatial dag. ```$dataset``` is the data saved from the previous step. ```$device``` can be cpu or gpu. Other hyperparameters that can be change include maximum number of lags ```$L```, dimension of hidden layers ```$hidden```, among others.
 
 
