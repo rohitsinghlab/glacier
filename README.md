@@ -9,7 +9,7 @@ Glacier is a python library to leverage spatial Granger causality to infer trans
 
 We recommend first setting up a conda environment with ```python>=3.10```. To run Glacier, it is important to first install both GASTON and Velorama, with 
 ```bash
-pip install pip install gaston-spatial
+pip install gaston-spatial
 ``` 
 and 
 ```bash
@@ -18,7 +18,13 @@ cd ./velorama
 export SKLEARN_ALLOW_DEPRECATED_SKLEARN_PACKAGE_INSTALL=True
 pip install .
 ``` 
-respectively.  
+respectively. Then, clone this repository with 
+```bash
+git clone git@github.com:rohitsinghlab/glacier.git
+cd glacier
+```
+## Tutorial
 
-## Tut
+After everything is installed, navigate to the tutorial folder. ```cerebellum_data``` is there as sample data. First download ```cerebellum_counts_mat.npy``` from [here](https://drive.google.com/drive/u/0/folders/1TaTSYs2z-Vb7-X8yLpZeokjN_52x6F1k) and put it inside the ```cerebellum_data``` folder. 
+
 
