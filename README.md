@@ -14,7 +14,7 @@ cd glacier
 ```
 Then, set up a conda or mamba environment with the environment.yml file here.
 ```bash
-conda create -f environment.yml
+conda create -n glacier -f environment.yml
 conda activate glacier
 ```
 
