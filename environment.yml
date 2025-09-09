@@ -3,5 +3,7 @@ channels:
   - conda-forge
 dependencies:
   - python=3.10
-  - gaston-spatial
-  - velorama
+  - pip
+  - pip:
+      - gaston-spatial
+      - git+https://github.com/rs239/velorama.git
