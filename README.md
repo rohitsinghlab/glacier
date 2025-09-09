@@ -14,6 +14,8 @@ pip install gaston-spatial
 and 
 ```bash
 export SKLEARN_ALLOW_DEPRECATED_SKLEARN_PACKAGE_INSTALL=True
+pip install -U pip setuptools wheel build packaging
+pip install schema_learn
 pip install git+https://github.com/rs239/velorama.git
 ``` 
 respectively. Then, clone this repository with 
