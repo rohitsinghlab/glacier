@@ -7,3 +7,4 @@ dependencies:
   - pip:
       - gaston-spatial
       - git+https://github.com/rs239/velorama.git
+      - glmpca
