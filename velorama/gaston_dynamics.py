@@ -38,8 +38,7 @@ def glm_pca(num_dims, penalty, counts_mat, coords_mat):
     
     return S_torch, A_torch
 
-def gaston_model(out_dir, S_torch, A_torch, isodepth_arch=[20,20], expression_fn_arch=[20,20], num_epochs=1000, checkpoint=500, 
-                 optimizer='adam', num_restarts=30):
+def gaston_model(out_dir, S_torch, A_torch, isodepth_arch=[20,20], expression_fn_arch=[20,20], num_epochs=1000, checkpoint=500, optimizer='adam', num_restarts=30):
     seed_list=range(num_restarts)
     for seed in seed_list:
         print(f'training neural network for seed {seed}')
