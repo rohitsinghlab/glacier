@@ -5,6 +5,7 @@ Glacier is a python library to leverage spatial Granger causality to infer trans
 
 **Our program is designed specifically for single-cell, spatial transcriptomics data.** Glacier constructs a directed acyclic graph (DAG) based on global spatial coordinates, by first using [GASTON](https://github.com/raphael-group/GASTON) to compute isodepth for each cell. Then, we test for Granger causality by using spatial-data adapted [Velorama](https://github.com/rs239/velorama). We are also able to invert each cell's isodepth, allowing information to flow in the other direction. 
 
+Our code can also be found on Zenodo: https://doi.org/10.5281/zenodo.19500378
 ## Installation:
 
 We recommend first cloning this repository:
